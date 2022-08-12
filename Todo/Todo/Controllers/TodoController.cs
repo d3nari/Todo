@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Todo.Controllers.Extension;
+using Todo.Domain.Repository;
 using Todo.Dtos;
 
 namespace Todo.Controllers;
@@ -7,6 +9,13 @@ namespace Todo.Controllers;
 [Route( "api/[controller]" )]
 public class TodoController : ControllerBase
 {
+    private readonly ITodoRepository _todoRepository;
+
+    public TodoController( ITodoRepository todoRepository )
+    {
+        _todoRepository = todoRepository ?? throw new ArgumentNullException( nameof( todoRepository ) );
+    }
+
     // get all todos
     [HttpGet]
     public List<TodoDto> GetAllTodos()
@@ -25,7 +34,7 @@ public class TodoController : ControllerBase
     }
 
     // get todo by id
-    [HttpGet( "{id:noZeroes}" )]
+    [HttpGet( "{id}" )]
     public TodoDto GetById( int id )
     {
         return new TodoDto()
@@ -40,7 +49,8 @@ public class TodoController : ControllerBase
     [HttpPost]
     public IActionResult Create( [FromBody] CreateTodoDto createTodoDto )
     {
-        // создаем todo
+        _todoRepository.Add( createTodoDto.ToEntity() );
+
         return Ok();
     }
 
@@ -53,7 +63,7 @@ public class TodoController : ControllerBase
     }
 
     // delete todo
-    [HttpDelete( "{id:noZeroes}" )]
+    [HttpDelete( "{id}" )]
     public IActionResult DeleteById( [FromRoute] int id )
     {
         return NotFound();
