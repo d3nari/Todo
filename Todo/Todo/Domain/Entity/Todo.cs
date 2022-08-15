@@ -20,6 +20,13 @@ public class Todo
         SetExecutionDate( executionDate );
     }
 
+    public void UpdateTodo(int Id, string body, DateTime executionDate)
+    {
+        SetId( Id );
+        SetBody(body);
+        SetExecutionDate(executionDate);
+    }
+
     public void SetBody( string body )
     {
         if ( string.IsNullOrEmpty( body ) )

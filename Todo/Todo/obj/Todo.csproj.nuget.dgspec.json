@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\danik\\repositories\\students\\webapi\\Todo\\Todo\\Todo\\Todo.csproj": {}
+    "C:\\Daniil\\Programming\\Todo\\Todo\\Todo\\Todo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\danik\\repositories\\students\\webapi\\Todo\\Todo\\Todo\\Todo.csproj": {
+    "C:\\Daniil\\Programming\\Todo\\Todo\\Todo\\Todo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danik\\repositories\\students\\webapi\\Todo\\Todo\\Todo\\Todo.csproj",
+        "projectUniqueName": "C:\\Daniil\\Programming\\Todo\\Todo\\Todo\\Todo.csproj",
         "projectName": "Todo",
-        "projectPath": "C:\\Users\\danik\\repositories\\students\\webapi\\Todo\\Todo\\Todo\\Todo.csproj",
-        "packagesPath": "C:\\Users\\danik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danik\\repositories\\students\\webapi\\Todo\\Todo\\Todo\\obj\\",
+        "projectPath": "C:\\Daniil\\Programming\\Todo\\Todo\\Todo\\Todo.csproj",
+        "packagesPath": "C:\\Users\\Даниил\\.nuget\\packages\\",
+        "outputPath": "C:\\Daniil\\Programming\\Todo\\Todo\\Todo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\danik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Даниил\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -63,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
