@@ -1,12 +1,15 @@
-﻿namespace Todo.Domain.Repository;
+﻿using Microsoft.EntityFrameworkCore;
+using Todo.Infrastructure;
+
+namespace Todo.Domain.Repository;
 
 public interface ITodoRepository
 {
     void Add( Entity.Todo item );
-    List<Entity.Todo> GetTodos();
-    void UpdateTodo( Entity.Todo item, int Id );
-    Entity.Todo GetTodo( int Id );
-    void DeleteTodo( int Id );
+    Task<List<Entity.Todo>> GetTodos();
+    Task UpdateTodo(Entity.Todo item, int Id);
+    Task<Entity.Todo> GetById(int id);
+    Task DeleteTodo(int Id);
 }
 
 public class TodoRepository : ITodoRepository
@@ -16,6 +19,13 @@ public class TodoRepository : ITodoRepository
     /// </summary>
     private static readonly List<Entity.Todo> _todos = new();
 
+    private readonly TodoDbContext _dbContext;
+
+    public TodoRepository(TodoDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
     private static int _index => _todos.Count + 1;
 
     public void Add( Entity.Todo item )
@@ -24,29 +34,29 @@ public class TodoRepository : ITodoRepository
         {
             throw new ArgumentNullException( nameof( item ) );
         }
-
-        item.SetId( _index );
-        _todos.Add( item );
+        _dbContext.Add( item );
     }
 
-    public List<Entity.Todo> GetTodos()
+
+    public async Task<Entity.Todo> GetById(int id)
     {
-        return _todos;
+        return await _dbContext.Set<Entity.Todo>().FirstOrDefaultAsync(t => t.Id == id);
     }
 
-    public void UpdateTodo(Entity.Todo item, int Id)
+    public async Task<List<Entity.Todo>> GetTodos()
     {
-        _todos[Id].UpdateTodo(Id, item.Body, item.ExecutionDate);
+        return await _dbContext.Set<Entity.Todo>().ToListAsync();
     }
 
-    public Entity.Todo GetTodo(int Id)
+    public async Task UpdateTodo(Entity.Todo item, int id)
     {
-        return _todos[Id];
+        Entity.Todo Todo = await _dbContext.Set<Entity.Todo>().FirstOrDefaultAsync(t => t.Id == id);
+        Todo.UpdateTodo(id, item.Body, item.ExecutionDate);
     }
 
-    public void DeleteTodo(int Id)
+    public async Task DeleteTodo(int id)
     {
-        // check if id is in range
-        _todos.RemoveAt(Id);
+        Entity.Todo Todo = await _dbContext.Set<Entity.Todo>().FirstOrDefaultAsync(t => t.Id == id);
+        _dbContext.Remove(Todo);
     }
 }

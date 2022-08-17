@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Todo.Application;
 using Todo.Domain.Repository;
 using Todo.Infrastructure;
 
@@ -12,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var connectionString = builder.Configuration.GetConnectionString("TodoConnectionString");
 builder.Services.AddDbContext<TodoDbContext>(c =>
